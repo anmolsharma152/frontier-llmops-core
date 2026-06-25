@@ -41,6 +41,9 @@ Thumbs.db
 # Jupyter
 .ipynb_checkpoints/
 
+# Planning / scratch
+next_steps.md
+
 # Logs
 *.log
 wandb/
