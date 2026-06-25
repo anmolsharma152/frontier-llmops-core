@@ -21,9 +21,15 @@ flowchart TB
         PPO[("PPO Optimization")]
     end
 
-    subgraph Serving["Phase 4: Production"]
+    subgraph Serving["Phase 5: Production"]
         Quant[("Quantization<br/>(AWQ / GGUF)")]
         vLLM[("Inference Engine<br/>(vLLM / TGI)")]
+    end
+
+    subgraph Guardrails["Phase 6: Guardrails & Caching"]
+        InputG[("Input Guardrails<br/>(Prompt Injection, PII)")]
+        Cache[("Semantic Cache<br/>(Exact & Fuzzy Match)")]
+        OutputG[("Output Guardrails<br/>(Content Filtering)")]
     end
 
     Raw --> Cur
@@ -35,6 +41,9 @@ flowchart TB
     RM --> PPO
     PPO --> Quant
     Quant --> vLLM
+    vLLM --> OutputG
+    InputG --> Cache
+    Cache --> vLLM
 ```
 
 ## Overview
@@ -48,3 +57,4 @@ This repository bridges the gap between using standard LLM APIs and engineering 
 - **03_alignment_rlhf:** Parse the Anthropic HH-RLHF dataset and use Hugging Face `trl` to train a basic reward model.
 - **04_eval_and_metrics:** Write a deterministic LLM-as-a-judge evaluation script that scores local model outputs against GPT-4 baselines.
 - **05_serving_inference:** Export a fine-tuned model to `.gguf` format and serve it locally with continuous batching via `vLLM`.
+- **06_cache_guardrails:** Implement input guardrails (prompt injection, PII detection), output guardrails (content filtering), and a semantic response cache to reduce redundant inference. (Frameworks TBD — e.g., Guardrails AI, NeMo Guardrails.)
