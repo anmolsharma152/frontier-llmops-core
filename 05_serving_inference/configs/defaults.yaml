@@ -1,0 +1,27 @@
+model:
+  name: "mistralai/Mistral-7B-v0.1"
+  tokenizer: "mistralai/Mistral-7B-v0.1"
+  dtype: "auto"
+  quantization: null  # null | "awq" | "gptq"
+  max_model_len: 8192
+
+server:
+  host: "0.0.0.0"
+  port: 8000
+  tensor_parallel_size: 1
+  gpu_memory_utilization: 0.9
+  max_num_seqs: 256
+  enable_prefix_caching: true
+  enforce_eager: false
+
+benchmark:
+  num_requests: 10
+  concurrency: 4
+  input_tokens: 512
+  output_tokens: 128
+  warmup: 2
+
+client:
+  api_key: "token-abc123"
+  base_url: "http://localhost:8000/v1"
+  model: null  # null → use server default

@@ -1,0 +1,19 @@
+[project]
+name = "frontier-eval-metrics"
+version = "0.1.0"
+description = "Phase 4: LLM evaluation — LLM-as-a-judge, automated metrics, and reporting"
+requires-python = ">=3.12"
+dependencies = [
+    "openai>=1.0.0",
+    "evaluate>=0.4.0",
+    "bert-score>=0.3.13",
+    "rouge-score>=0.1.2",
+    "sacrebleu>=2.4.0",
+    "seaborn>=0.13.0",
+    "matplotlib>=3.8.0",
+    "numpy>=1.26.0",
+    "pyyaml>=6.0",
+]
+
+[project.scripts]
+eval-run = "scripts.main:main"

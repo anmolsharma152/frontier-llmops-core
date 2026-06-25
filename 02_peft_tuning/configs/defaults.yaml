@@ -1,0 +1,32 @@
+model:
+  base_model: "mistralai/Mistral-7B-v0.1"
+  dry_run_model: "openai-community/gpt2"  # tiny model for CPU validation
+  load_in_4bit: true
+  bnb_4bit_quant_type: "nf4"
+  bnb_4bit_use_double_quant: true
+
+lora:
+  r: 16
+  lora_alpha: 32
+  target_modules: ["q_proj", "v_proj", "k_proj", "o_proj"]
+  lora_dropout: 0.05
+  bias: "none"
+  task_type: "CAUSAL_LM"
+
+training:
+  output_dir: "./output"
+  num_train_epochs: 3
+  per_device_train_batch_size: 4
+  gradient_accumulation_steps: 4
+  learning_rate: 2e-4
+  warmup_ratio: 0.03
+  logging_steps: 10
+  save_steps: 200
+  max_seq_length: 512
+  dry_run_batches: 2  # batches to run in dry-run mode
+
+data:
+  dataset_path: null  # null = use HuggingFace dataset; else path to Phase-1 output
+  hf_dataset: "databricks/databricks-dolly-15k"
+  text_column: "response"
+  validation_split: 0.05

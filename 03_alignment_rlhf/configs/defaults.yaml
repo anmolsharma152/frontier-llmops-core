@@ -1,0 +1,34 @@
+model:
+  sft_model: "mistralai/Mistral-7B-v0.1"
+  reward_model: "mistralai/Mistral-7B-v0.1"
+  dry_run_model: "openai-community/gpt2"
+
+reward:
+  learning_rate: 1e-5
+  num_train_epochs: 2
+  per_device_train_batch_size: 4
+  max_length: 512
+  dropout: 0.1
+
+ppo:
+  learning_rate: 1.4e-5
+  batch_size: 16
+  mini_batch_size: 4
+  gradient_accumulation_steps: 4
+  ppo_epochs: 4
+  cliprange: 0.2
+  cliprange_value: 0.2
+  vf_coef: 0.1
+  kl_penalty: 0.05
+  max_length: 512
+
+dpo:
+  beta: 0.1
+  learning_rate: 5e-6
+  num_train_epochs: 3
+  per_device_train_batch_size: 4
+  max_length: 512
+
+data:
+  dataset: "Anthropic/hh-rlhf"
+  validation_split: 0.05

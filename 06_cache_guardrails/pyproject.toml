@@ -1,0 +1,17 @@
+[project]
+name = "frontier-cache-guardrails"
+version = "0.1.0"
+description = "Phase 6: Input/output guardrails and semantic response caching"
+requires-python = ">=3.12"
+dependencies = [
+    "openai>=1.0.0",
+    "redis>=5.0.0",
+    "sentence-transformers>=3.0.0",
+    "presidio-analyzer>=2.2.0",
+    "presidio-anonymizer>=2.2.0",
+    "pyyaml>=6.0",
+    "numpy>=1.26.0",
+]
+
+[project.scripts]
+guardrails-run = "scripts.main:main"

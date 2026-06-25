@@ -1,0 +1,36 @@
+guardrails:
+  input:
+    enabled: true
+    max_prompt_length: 4096
+    blocklisted_keywords: []
+    prompt_injection_threshold: 0.7  # confidence
+    pii:
+      enabled: true
+      entities:
+        - "PHONE_NUMBER"
+        - "EMAIL_ADDRESS"
+        - "CREDIT_CARD"
+        - "US_SSN"
+        - "PERSON"
+      anonymize: false
+
+  output:
+    enabled: true
+    max_response_length: 8192
+    blocklisted_topics: ["violence", "hate_speech", "self_harm"]
+    toxicity_threshold: 0.8
+
+cache:
+  enabled: true
+  backend: "redis"  # redis | memory
+  redis_url: "redis://localhost:6379/0"
+  ttl: 3600  # seconds
+  similarity_threshold: 0.92
+  embedding_model: "BAAI/bge-small-en-v1.5"
+  max_size: 10000  # entries (memory backend only)
+
+llm:
+  provider: "openai"
+  model: "gpt-4o-mini"
+  temperature: 0.7
+  api_base: null  # null → default OpenAI

@@ -1,0 +1,16 @@
+[project]
+name = "frontier-data-curation"
+version = "0.1.0"
+description = "Phase 1: Synthetic data generation, chunking, embeddings, and quality filtering"
+requires-python = ">=3.12"
+dependencies = [
+    "openai>=1.0.0",
+    "tiktoken>=0.7.0",
+    "langchain-text-splitters>=0.3.0",
+    "sentence-transformers>=3.0.0",
+    "pyyaml>=6.0",
+    "numpy>=1.26.0",
+]
+
+[project.scripts]
+data-curation = "scripts.main:main"

@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.so
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Model weights / checkpoints
+*.bin
+*.safetensors
+*.pt
+checkpoints/
+
+# Data
+data/raw/
+data/processed/
+*.parquet
+*.arrow
+
+# Config secrets
+.env
+*.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+wandb/
+runs/

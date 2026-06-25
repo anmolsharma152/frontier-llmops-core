@@ -1,0 +1,29 @@
+domain: "medical"
+description: "Medical diagnosis, treatment guidelines, and clinical reasoning"
+
+generation:
+  model: "gpt-4o-mini"
+  temperature: 0.8
+  n_pairs: 100
+  system_prompt_template: |
+    You are a medical domain expert generating high-quality training data.
+    Generate {n} prompt-completion pairs about {domain}.
+    Each prompt should require expert medical reasoning.
+    Each completion should be accurate, detailed, and educational.
+
+chunking:
+  strategy: "recursive"  # character | token | recursive | semantic
+  chunk_size: 512
+  chunk_overlap: 64
+  separators: ["\n\n", "\n", ".", " ", ""]
+
+embedding:
+  model: "BAAI/bge-small-en-v1.5"
+  batch_size: 32
+  normalize_embeddings: true
+
+quality_filter:
+  min_length: 50
+  max_length: 4096
+  max_repetition_ratio: 0.3
+  perplexity_threshold: null  # set to e.g. 100 to enable
