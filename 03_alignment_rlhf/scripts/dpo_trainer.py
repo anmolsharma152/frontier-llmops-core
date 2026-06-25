@@ -19,6 +19,9 @@ class DPOTrainer:
         self.dry_run = dry_run
         self.output_dir = Path("output/dpo")
         self.output_dir.mkdir(parents=True, exist_ok=True)
+        if dry_run:
+            import os as _os
+            _os.environ["WANDB_MODE"] = "offline"
 
     def train(self):
         model_name = (

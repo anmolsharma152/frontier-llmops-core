@@ -38,6 +38,26 @@ python scripts/main.py report --judge-results output/judge/judge_results.jsonl \
                                --metrics-results output/metrics/metrics.json
 ```
 
+## Files
+
+| Path | Purpose |
+|------|---------|
+| `scripts/llm_judge.py` | GPT-4o scoring with configurable rubric |
+| `scripts/automated_metrics.py` | BLEU, ROUGE-L, BERTScore, METEOR via `evaluate` |
+| `scripts/eval_dataset.py` | Load eval data from JSONL or built-in examples |
+| `scripts/report.py` | Generate Markdown report with matplotlib charts |
+| `scripts/main.py` | Argparse CLI with `judge`, `metrics`, `report` commands |
+| `configs/defaults.yaml` | Judge model, rubric template, metric selection |
+| `pyproject.toml` | Python dependencies (openai, evaluate, bert-score, etc.) |
+
+## Dependencies
+
+```bash
+pip install .
+```
+
+Requires `OPENAI_API_KEY` for LLM-as-a-judge. Automated metrics run entirely on CPU.
+
 ## References
 
 - Zheng et al. (2023) — "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena"

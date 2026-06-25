@@ -21,7 +21,7 @@ def cmd_judge(config: dict, input_path: str, output_dir: Path) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     with open(output_dir / "judge_results.jsonl", "w") as f:
         for r in results:
-            f.write(json.dumps(r) + "\n")
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
     print(f"Judged {len(results)} samples → {output_dir / 'judge_results.jsonl'}")
 
 
@@ -31,7 +31,7 @@ def cmd_metrics(config: dict, input_path: str, output_dir: Path) -> None:
     scores = metrics.compute_all(dataset)
     output_dir.mkdir(parents=True, exist_ok=True)
     with open(output_dir / "metrics.json", "w") as f:
-        json.dump(scores, f, indent=2)
+        json.dump(scores, f, indent=2, ensure_ascii=False)
     print(f"Metrics → {output_dir / 'metrics.json'}")
     for name, value in scores.items():
         if isinstance(value, float):

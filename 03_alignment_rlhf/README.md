@@ -42,6 +42,27 @@ python scripts/main.py dpo
 
 Open `run_on_colab.ipynb` for a step-by-step Colab setup.
 
+## Files
+
+| Path | Purpose |
+|------|---------|
+| `scripts/reward_model.py` | Binary classifier trained on chosen/rejected pairs |
+| `scripts/ppo_trainer.py` | PPO alignment loop via `trl.PPOTrainer` |
+| `scripts/dpo_trainer.py` | DPO alignment via `trl.DPOTrainer` (simpler alternative) |
+| `scripts/preference_data.py` | Load and format Anthropic HH-RLHF / UltraFeedback datasets |
+| `scripts/main.py` | Argparse CLI with `reward`, `ppo`, `dpo` commands |
+| `configs/defaults.yaml` | Reward, PPO, DPO, and data configuration |
+| `run_on_colab.ipynb` | Step-by-step Colab notebook for T4 GPU training |
+| `pyproject.toml` | Python dependencies (torch, transformers, trl, datasets, etc.) |
+
+## Dependencies
+
+```bash
+pip install .
+```
+
+GPU strongly recommended for full training. Dry-run mode (`--dry-run`) works on CPU.
+
 ## References
 
 - Ouyang et al. (2022) — "Training Language Models to Follow Instructions with Human Feedback" (InstructGPT)

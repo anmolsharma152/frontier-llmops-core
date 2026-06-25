@@ -77,4 +77,4 @@ class TextChunker:
         path.parent.mkdir(parents=True, exist_ok=True)
         with open(path, "w") as f:
             for chunk in chunks:
-                f.write(json.dumps(chunk) + "\n")
+                f.write(json.dumps(chunk, ensure_ascii=False) + "\n")

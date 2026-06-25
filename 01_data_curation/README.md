@@ -47,6 +47,18 @@ python scripts/main.py --config configs/defaults.yaml --input output/02_chunked/
 python scripts/main.py --config configs/defaults.yaml --input output/02_chunked/chunks.jsonl filter
 ```
 
+## Files
+
+| Path | Purpose |
+|------|---------|
+| `scripts/generator.py` | OpenAI API caller for synthetic prompt-completion generation |
+| `scripts/chunker.py` | Character / token / recursive / semantic chunking strategies |
+| `scripts/embedder.py` | Sentence-transformer embedding pipeline |
+| `scripts/quality_filter.py` | Heuristic filters: length, repetition, perplexity |
+| `scripts/main.py` | Argparse CLI entrypoint with `generate`, `chunk`, `embed`, `filter`, `all` |
+| `configs/defaults.yaml` | Domain, model, chunking, embedding, and filter configuration |
+| `pyproject.toml` | Python dependencies (openai, tiktoken, sentence-transformers, etc.) |
+
 ## Dependencies
 
 ```bash

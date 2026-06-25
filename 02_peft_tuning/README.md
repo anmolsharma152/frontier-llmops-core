@@ -51,10 +51,29 @@ Open `run_on_colab.ipynb` and follow the steps. It will:
 3. Train with LoRA
 4. Save the adapter to Google Drive
 
+## Files
+
+| Path | Purpose |
+|------|---------|
+| `scripts/trainer.py` | QLoRA training loop (dry-run with GPT-2, full with Mistral 7B) |
+| `scripts/data.py` | Dataset loading, tokenization, and formatting |
+| `scripts/inference.py` | Generation with temperature/top-p sampling |
+| `scripts/merge.py` | Merge LoRA adapter back into base model |
+| `scripts/main.py` | Argparse CLI with `train`, `infer`, `merge` commands |
+| `configs/defaults.yaml` | Model, LoRA, training, and data configuration |
+| `run_on_colab.ipynb` | Step-by-step Colab notebook for T4 GPU training |
+| `pyproject.toml` | Python dependencies (torch, transformers, peft, bitsandbytes, etc.) |
+
+## Dependencies
+
+```bash
+pip install .
+```
+
+GPU strongly recommended for full training. Dry-run mode (`--dry-run`) works on CPU.
+
 ## References
 
 - Hu et al. (2021) — "LoRA: Low-Rank Adaptation of Large Language Models"
 - Dettmers et al. (2023) — "QLoRA: Efficient Finetuning of Quantized Language Models"
 - PEFT docs — https://huggingface.co/docs/peft
-```
-

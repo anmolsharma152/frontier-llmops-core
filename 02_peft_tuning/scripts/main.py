@@ -11,21 +11,17 @@ def load_config(path: str) -> dict:
         return yaml.safe_load(f)
 
 
-def detect_device(config: dict) -> torch.device:
+def detect_device(dry_run: bool) -> torch.device:
     if torch.cuda.is_available():
         return torch.device("cuda")
-    print("[INFO] No GPU detected — dry-run mode enabled (tiny model, limited batches)")
-    return torch.device("cpu")
+    if dry_run:
+        print("[INFO] No GPU — dry-run mode enabled")
+        return torch.device("cpu")
+    raise RuntimeError("GPU required for training. Use --dry-run or run on Colab.")
 
 
 def cmd_train(config: dict, dry_run: bool) -> None:
-    device = detect_device(config) if dry_run else torch.device("cuda")
-    if not dry_run and device.type == "cpu":
-        raise RuntimeError(
-            "Full training requires a GPU. Use --dry-run for CPU validation, "
-            "or run on Colab/cloud GPU."
-        )
-
+    device = detect_device(dry_run)
     trainer = QLoRATrainer(config, device, dry_run)
     trainer.train()
 

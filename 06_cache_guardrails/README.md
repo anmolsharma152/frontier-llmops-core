@@ -47,6 +47,26 @@ python scripts/main.py cache-stats
 python scripts/main.py pipeline --prompt "What is machine learning?"
 ```
 
+## Files
+
+| Path | Purpose |
+|------|---------|
+| `scripts/input_guardrails.py` | Prompt injection detection, PII scanning, blocklist enforcement |
+| `scripts/output_guardrails.py` | Toxicity scoring, topic filtering, response length limits |
+| `scripts/semantic_cache.py` | Embedding-based cache (Redis or in-memory) with similarity threshold |
+| `scripts/pipeline.py` | Composable end-to-end pipeline: guard → cache → LLM → guard |
+| `scripts/main.py` | Argparse CLI with `guard-input`, `guard-output`, `cache-stats`, `pipeline` |
+| `configs/defaults.yaml` | Guardrail rules, cache backend/TTL/threshold, LLM provider |
+| `pyproject.toml` | Python dependencies (openai, redis, sentence-transformers, presidio, etc.) |
+
+## Dependencies
+
+```bash
+pip install .
+```
+
+Requires `OPENAI_API_KEY` for LLM calls. Redis is optional (falls back to in-memory cache).
+
 ## References
 
 - Perez & Ribeiro (2022) — "Ignore Previous Prompt: Attack Techniques For Language Models"

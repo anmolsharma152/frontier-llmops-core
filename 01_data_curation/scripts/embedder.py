@@ -51,4 +51,4 @@ class TextEmbedder:
         meta_path = path.with_suffix(".jsonl")
         with open(meta_path, "w") as f:
             for text, meta in zip(data["texts"], data["metadata"]):
-                f.write(json.dumps({"text": text, **meta}) + "\n")
+                f.write(json.dumps({"text": text, **meta}, ensure_ascii=False) + "\n")

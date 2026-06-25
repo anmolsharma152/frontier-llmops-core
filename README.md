@@ -21,6 +21,11 @@ flowchart TB
         PPO[("PPO Optimization")]
     end
 
+    subgraph Eval["Phase 4: Eval & Metrics"]
+        Judge[("LLM-as-a-Judge<br/>(GPT-4o Scoring)")]
+        Auto[("Automated Metrics<br/>(BLEU, ROUGE, BERTScore)")]
+    end
+
     subgraph Serving["Phase 5: Production"]
         Quant[("Quantization<br/>(AWQ / GGUF)")]
         vLLM[("Inference Engine<br/>(vLLM / TGI)")]
@@ -39,7 +44,9 @@ flowchart TB
     LoRA --> Pref
     Pref --> RM
     RM --> PPO
-    PPO --> Quant
+    PPO --> Judge
+    Judge --> Auto
+    Auto --> Quant
     Quant --> vLLM
     vLLM --> OutputG
     InputG --> Cache

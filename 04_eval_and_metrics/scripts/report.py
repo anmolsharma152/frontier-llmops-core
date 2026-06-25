@@ -31,7 +31,9 @@ def generate_report(judge_path: str, metrics_path: str, output_dir: Path) -> Non
             report_lines.append(f"| {name} | {value} |")
 
     report_lines.append("\n## LLM Judge Scores\n")
-    criteria = [k for k in judge_results[0].keys() if k not in ("_sample_id", "justification", "error", "raw")]
+    criteria = []
+    if judge_results:
+        criteria = [k for k in judge_results[0].keys() if k not in ("_sample_id", "justification", "error", "raw")]
     if criteria:
         report_lines.append("| Sample ID | " + " | ".join(c.capitalize() for c in criteria) + " |")
         report_lines.append("|-----------|" + "|".join("---" for _ in criteria) + "|")
@@ -40,10 +42,12 @@ def generate_report(judge_path: str, metrics_path: str, output_dir: Path) -> Non
             for c in criteria:
                 row.append(str(r.get(c, "")))
             report_lines.append("| " + " | ".join(row) + " |")
+    else:
+        report_lines.append("No judge results available.\n")
 
     fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 
-    if criteria:
+    if criteria and judge_results:
         scores = {c: [] for c in criteria}
         for r in judge_results:
             for c in criteria:

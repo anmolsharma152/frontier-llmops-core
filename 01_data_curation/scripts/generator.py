@@ -60,4 +60,4 @@ class SyntheticDataGenerator:
         path.parent.mkdir(parents=True, exist_ok=True)
         with open(path, "w") as f:
             for pair in pairs:
-                f.write(json.dumps(pair) + "\n")
+                f.write(json.dumps(pair, ensure_ascii=False) + "\n")

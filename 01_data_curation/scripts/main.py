@@ -34,7 +34,7 @@ def cmd_embed(config: dict, input_path: Path, output_dir: Path) -> None:
     embeddings = embedder.embed_file(input_path)
     output_dir.mkdir(parents=True, exist_ok=True)
     embedder.save(embeddings, output_dir / "embeddings.npy")
-    print(f"Embedded {len(embeddings)} documents → {output_dir / 'embeddings.npy'}")
+    print(f"Embedded {len(embeddings['texts'])} documents → {output_dir / 'embeddings.npy'}")
 
 
 def cmd_filter(config: dict, input_path: Path, output_dir: Path) -> None:
